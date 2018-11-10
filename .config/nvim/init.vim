@@ -7,7 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx'
-Plugin 'mhartington/oceanic-next'
+"Plugin 'mhartington/oceanic-next'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
@@ -42,9 +42,11 @@ set tabstop=4
 set shiftwidth=4
 set hlsearch
 
+set background=dark
+"let g:solarized_visibility="high"
+"let g:solarized_contrast="high"
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
-set background=dark
 
 if (has("termguicolors"))
   set termguicolors
@@ -57,10 +59,10 @@ syntax enable
 
 nnoremap <C-]> <C-w><C-]><C-w>T
 
-colorscheme OceanicNext
+"colorscheme OceanicNext
 "colorscheme solarized
 "colorscheme stormpetrel
-"colorscheme quantum
+colorscheme quantum
 "colorscheme stellarized_dark
 "colorscheme carbonized-dark
 
@@ -78,6 +80,8 @@ function! ClearAllButMatches()
 endfunction
 
 
+highlight Search guibg=SteelBlue1
+highlight Visual guibg=MediumTurquoise guifg=Purple3
 set cursorline
 
 augroup CursorLine
@@ -86,7 +90,6 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-highlight Cursor guibg=DarkRed
 
 highlight Comment cterm=italic gui=italic
 
