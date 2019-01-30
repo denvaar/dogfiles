@@ -7,11 +7,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx'
-"Plugin 'mhartington/oceanic-next'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'slim-template/vim-slim.git'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'to': './install --bin' }
+Plugin 'junegunn/fzf.vim'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -43,10 +44,6 @@ set shiftwidth=4
 set hlsearch
 
 set background=dark
-"let g:solarized_visibility="high"
-"let g:solarized_contrast="high"
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
 
 if (has("termguicolors"))
   set termguicolors
@@ -56,16 +53,9 @@ set nu
 set rnu
 syntax enable
 
-
 nnoremap <C-]> <C-w><C-]><C-w>T
 
-"colorscheme OceanicNext
-"colorscheme solarized
-"colorscheme stormpetrel
-colorscheme quantum
-"colorscheme stellarized_dark
-"colorscheme carbonized-dark
-
+colorscheme atlantis
 
 "" Remove all text except what matches the current search result
 "" The opposite of :%s///g (which clears all instances of the current search).
@@ -79,9 +69,19 @@ function! ClearAllButMatches()
     let @c = old
 endfunction
 
+nmap <C-S-A> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
-highlight Search guibg=SteelBlue1
-highlight Visual guibg=MediumTurquoise guifg=Purple3
+if exists('*hexHighlight()')
+  nmap <leader>h :call HexHighlight()<Return>
+endif
+
+
 set cursorline
 
 augroup CursorLine
