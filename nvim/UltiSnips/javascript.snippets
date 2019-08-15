@@ -1,0 +1,126 @@
+snippet sfc; "Stateless Functional React Component"
+const ${1:Component} = (${2:params}) => (
+  <div>
+    $0
+  </div>
+);
+
+export default $1;
+endsnippet
+
+snippet sfc "Stateless Functional React Component"
+const ${1:Component} = (${2:params}) => (
+  <div>
+    $0
+  </div>
+)
+
+export default $1
+endsnippet
+
+snippet rc; "React component"
+class ${1:Component} extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {$2};
+  }
+
+  render() {
+    return (
+      $0
+    );
+  }
+};
+
+export default $1;
+endsnippet
+
+snippet rc "React component"
+class ${1:Component} extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {$2}
+  }
+
+  render() {
+    return (
+      $0
+    )
+  }
+}
+
+export default $1
+endsnippet
+
+snippet impreact;
+import React from 'react';
+$0
+endsnippet
+
+snippet impreact
+import React from 'react'
+$0
+endsnippet
+
+snippet impstyled
+import styled from 'styled-components'
+$0
+endsnippet
+
+snippet ss; "SetState()"
+this.setState({$1});$0
+endsnippet
+
+snippet ss "SetState()"
+this.setState({$1})$0
+endsnippet
+
+snippet boilreactc "Boilerplate React component"
+import React from 'react'
+import PropTypes from 'prop-types'
+
+
+class ${1:App} extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        $0
+      </div>
+    )
+  }
+}
+
+$1.propTypes = {
+}
+
+export default $1
+endsnippet
+
+snippet cn "ClassName prop"
+className="${1}"$0
+endsnippet
+
+snippet < "Element"
+<${1:div} $2>
+  $0
+</$1>
+endsnippet
+
+snippet </ "Element"
+<$1 />$0
+endsnippet
+
+snippet impcom "Import component"
+import $1 from 'components/$1'
+endsnippet
+
+snippet impcon "Import container component"
+import $1 from 'containers/$1'
+endsnippet
