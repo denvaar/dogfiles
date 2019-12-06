@@ -3,7 +3,8 @@
 " **********************
 set nocompatible
 filetype off
-set rtp+=~/.config/nvim/bundle/Vundle.vim
+let runtimepath=$VIM_RUNTIME . '/bundle/Vundle.vim'
+execute 'set rtp+=' . runtimepath
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -36,12 +37,18 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+set backspace=indent,eol,start
+
 set nu
 set rnu
 syntax enable
 
 set background=dark
 set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let &t_ZH="\<Esc>[3m"
+let &t_ZR="\<Esc>[23m"
 set hlsearch
 set autoindent
 set expandtab
