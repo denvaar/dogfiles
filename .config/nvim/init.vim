@@ -11,12 +11,17 @@ Plugin 'SirVer/ultisnips'
 Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'elixir-editors/vim-elixir'
+Plugin 'mhinz/vim-mix-format'
 Plugin 'scrooloose/nerdtree'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'to': './install --bin' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'haishanh/night-owl.vim'
+Plugin 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
+Plugin 'kaicataldo/material.vim'
 
 set runtimepath+=~/.config/nvim
 call vundle#end()
@@ -30,16 +35,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsSnippetDir='~/.config/nvim/UltiSnips'
-let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
-
-
 
 set nu
 set rnu
@@ -60,11 +55,20 @@ if (has("termguicolors"))
 endif
 
 "colorscheme nightsky
-colorscheme night-owl
+"colorscheme night-owl
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'ocean'
+colorscheme material
+
+highlight CursorLine guibg=#23303c
+highlight LineNr guifg=#50b7b0 guibg=#22263a
+highlight CursorLineNR guifg=#61f967 guibg=#22263a
 
 highlight link tsxTagName tsxCloseString
 highlight link tsxTag tsxCloseTag
 hi tsxAttrib guifg=#aed86b gui=italic
+
+let g:mix_format_on_save = 1
 
 function TrimWhiteSpace()
   %s/\s*$//
@@ -72,11 +76,21 @@ function TrimWhiteSpace()
 :endfunction
 
 autocmd BufWritePre * :call TrimWhiteSpace()
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+autocmd BufEnter * :syntax sync fromstart " Fix syntax highlighting bug after save
 
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsSnippetDir='~/.config/nvim/UltiSnips'
+let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
 
 
 highlight htmlArg cterm=italic gui=italic

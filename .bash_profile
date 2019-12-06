@@ -23,7 +23,7 @@ export BLAWG_API_GET="http://localhost:4000/api/articles"
 export BLAWG_API_UPDATE="http://localhost:4000/api/articles/{slug}/"
 export BLAWG_API_DELETE="http://localhost:4000/api/articles/{slug}/"
 
-export PS1="$CYAN_FG_BOLD\u $PINK_FG_BOLD\W$NO_COLOUR 👑 "
+export PS1="$CYAN_FG_BOLD\u $PINK_FG_BOLD\W$NO_COLOUR ﹩ "
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
