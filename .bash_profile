@@ -12,7 +12,11 @@ BLUE_FG_BOLD="\[\033[1;34m\]"
 PINK_FG_BOLD="\[\033[1;35m\]"
 CYAN_FG_BOLD="\[\033[1;36m\]"
 
-hash nvim 2>/dev/null && { alias vim="nvim"; }
+export VIM_RUNTIME="~/.vim"
+hash nvim 2>/dev/null && {
+  alias vim="nvim";
+  export VIM_RUNTIME="~/.config/nvim";
+}
 
 export BLAWG_SECRET_KEY="secret_key"
 export BLAWG_EDITOR="vim"
