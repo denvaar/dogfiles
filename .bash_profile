@@ -28,7 +28,8 @@ export PS1="$CYAN_FG_BOLD\u $PINK_FG_BOLD\W$NO_COLOUR ﹩ "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 export ERL_AFLAGS="-kernel shell_history enabled"
-eval "$(rbenv init -)"
+
+hash rbenv 2>/dev/null && { eval "$(rbenv init -)"; }
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
