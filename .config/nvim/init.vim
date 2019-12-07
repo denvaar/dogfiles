@@ -24,7 +24,6 @@ Plugin 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
 Plugin 'kaicataldo/material.vim'
 
-set runtimepath+=~/.config/nvim
 call vundle#end()
 filetype plugin indent on
 
@@ -61,8 +60,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-"colorscheme nightsky
-"colorscheme night-owl
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'ocean'
 colorscheme material
