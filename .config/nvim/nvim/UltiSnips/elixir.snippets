@@ -1,0 +1,30 @@
+snippet deffunc "defines a new function" !b
+def ${1:name}(${2:params}) do
+  $0
+end
+endsnippet
+
+snippet defmod "defines a new module" !b
+defmodule ${1:Module} do
+  @moduledoc """
+  ${2}
+  """
+
+  $0
+end
+endsnippet
+
+snippet genserver "defines a new GenServer" !b
+defmodule ${1:name} do
+  use GenServer
+
+  def start_link(${2:default}) do
+    GenServer.start_link(__MODULE__, default)
+  end
+  $0
+  @impl true
+  def init(default) do
+    {:ok, default}
+  end
+end
+endsnippet

@@ -1,0 +1,37 @@
+snippet fc "React function component" !b
+import React from 'react';
+
+interface Props {
+  $2
+}
+
+const ${1:Component} = ({ `!p snip.rv = ', '.join([name[:-1] for name in t[2].split()[::2]])` }: Props) => {
+  return (
+    $0
+  );
+}
+
+export default $1;
+endsnippet
+
+snippet deffunc "Function"
+const ${1:func} = ($3) => {
+  return (
+    $0
+  );
+}
+endsnippet
+
+snippet usestate "React useState hook"
+const [$3] = useState<$2>($1);$0
+endsnippet
+
+snippet useeffect "React useEffect hook"
+useEffect(() => {
+  $1
+}, [$2]);$0
+endsnippet
+
+snippet usequery "React Apollo useQuery hook"
+const {${2:loading, error, data}} = useQuery<$3>($1);$0
+endsnippet
