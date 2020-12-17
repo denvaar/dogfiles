@@ -1,6 +1,3 @@
-" **********************
-" **      Plugins     **
-" **********************
 set nocompatible
 filetype off
 let runtimepath=$VIM_RUNTIME . '/bundle/Vundle.vim'
@@ -13,7 +10,7 @@ Plugin 'othree/yajs.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'mhinz/vim-mix-format'
-Plugin 'scrooloose/nerdtree'
+Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'to': './install --bin' }
@@ -27,10 +24,6 @@ Plugin 'kaicataldo/material.vim'
 call vundle#end()
 filetype plugin indent on
 
-" **********************
-" ** General Settings **
-" **********************
-
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -42,6 +35,7 @@ set nu
 set rnu
 syntax enable
 
+set fillchars+=vert:█
 set background=dark
 set t_Co=256
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -62,15 +56,20 @@ endif
 
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'ocean'
-colorscheme material
+colorscheme quantum
 
-highlight CursorLine guibg=#23303c
-highlight LineNr guifg=#50b7b0 guibg=#22263a
+" let g:atlantis_terminal_italics = 1
+" colorscheme atlantis
+
+highlight Comment cterm=italic gui=italic
+highlight LineNr guifg=#50b7b0
+"guibg=#22263a
 highlight CursorLineNR guifg=#61f967 guibg=#22263a
-
-highlight link tsxTagName tsxCloseString
-highlight link tsxTag tsxCloseTag
-hi tsxAttrib guifg=#aed86b gui=italic
+highlight htmlArg cterm=italic gui=italic
+highlight tsxAttrib gui=italic
+highlight xmlAttrib gui=italic
+highlight link tsxCloseTagName tsxTagName
+"highlight CursorLine guibg=#23303c
 
 let g:mix_format_on_save = 1
 
@@ -83,12 +82,26 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
+function FormatCode()
+  let l:winview = winsaveview()
+  mark `
+  normal! gg=G
+  normal ``
+  call winrestview(l:winview)
+:endfunction
+autocmd BufWritePre *.html.leex,*.html.eex :call FormatCode()
+
 autocmd BufEnter * :syntax sync fromstart " Fix syntax highlighting bug after save
 
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Comment', 'border': 'sharp' } }
+
+nnoremap <silent> <C-p> :FZF<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -97,12 +110,12 @@ let g:UltiSnipsSnippetDir='~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
 
 
-highlight htmlArg cterm=italic gui=italic
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType typescript.tsx setlocal shiftwidth=2 tabstop=2
-autocmd BufNewFile,BufRead *.tsx,*.jsx,*.js,*.ts set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.ts set filetype=typescript.tsx
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType slim setlocal shiftwidth=2 tabstop=2
 autocmd FileType python highlight OverLength ctermbg=181 ctermfg=Black guibg=#dc322f
 autocmd FileType python match OverLength /\%81v.\+/
+
