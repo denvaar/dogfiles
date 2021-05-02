@@ -1,0 +1,21 @@
+[user]
+    name = Denver Smith
+    email = denverpsmith@gmail.com
+[credential]
+    helper = osxkeychain
+
+[core]
+    pager = delta
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = TwoDark
+
+    file-style = bold "#ea9999" ul
+    minus-style = syntax "#381313"
+    plus-style = syntax "#14290b"
+
+[interactive]
+    diffFilter = delta --color-only
