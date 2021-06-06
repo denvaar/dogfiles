@@ -7,8 +7,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'elixir-editors/vim-elixir'
+Plugin 'pantharshit00/vim-prisma'
 Plugin 'mhinz/vim-mix-format'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'leafgarland/typescript-vim'
@@ -17,8 +18,8 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'to': './install --bin' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'haishanh/night-owl.vim'
 Plugin 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'ejs', 'html'] }
 Plugin 'kaicataldo/material.vim'
 
 call vundle#end()
@@ -62,14 +63,13 @@ colorscheme quantum
 " colorscheme atlantis
 
 highlight Comment cterm=italic gui=italic
-highlight LineNr guifg=#50b7b0
-"guibg=#22263a
-highlight CursorLineNR guifg=#61f967 guibg=#22263a
+highlight LineNr guifg=#8b6f83
+highlight CursorLineNR guifg=#ff00e3 guibg=#323c8f
+highlight StatusLine guifg=#ff00e3 guibg=#323c8f
 highlight htmlArg cterm=italic gui=italic
 highlight tsxAttrib gui=italic
 highlight xmlAttrib gui=italic
 highlight link tsxCloseTagName tsxTagName
-"highlight CursorLine guibg=#23303c
 
 let g:mix_format_on_save = 1
 
@@ -80,7 +80,7 @@ function TrimWhiteSpace()
 
 autocmd BufWritePre * :call TrimWhiteSpace()
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.ejs,*.yaml,*.html PrettierAsync
 
 function FormatCode()
   let l:winview = winsaveview()
@@ -98,10 +98,12 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+let $BAT_THEME='TwoDark'
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Comment', 'border': 'sharp' } }
+let $FZF_DEFAULT_OPTS="--ansi --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 
-nnoremap <silent> <C-p> :FZF<CR>
+nnoremap <silent> <C-p> :Files<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -114,8 +116,14 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType typescript.tsx setlocal shiftwidth=2 tabstop=2
 autocmd BufNewFile,BufRead *.tsx,*.ts set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType slim setlocal shiftwidth=2 tabstop=2
 autocmd FileType python highlight OverLength ctermbg=181 ctermfg=Black guibg=#dc322f
 autocmd FileType python match OverLength /\%81v.\+/
 
+
+"func SaveBufferContents(timer)
+"  silent w !cat > '/tmp/vimdump'
+"endfunc
+"let timer = timer_start(500, 'SaveBufferContents', {'repeat': -1})
