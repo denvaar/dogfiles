@@ -62,10 +62,17 @@ colorscheme quantum
 " let g:atlantis_terminal_italics = 1
 " colorscheme atlantis
 
+highlight TabLine guifg=#41237F guibg=#159393
+highlight TabLineFill guifg=#ffffff guibg=#159393
+highlight TabLineSel guifg=#7B59C0 guibg=#D7F1F1
+
+highlight Visual guibg=#f2f2f2 guifg=none
+
 highlight Comment cterm=italic gui=italic
-highlight LineNr guifg=#8b6f83
-highlight CursorLineNR guifg=#ff00e3 guibg=#323c8f
-highlight StatusLine guifg=#ff00e3 guibg=#323c8f
+highlight LineNr guifg=#B48EAD guibg=#20273E
+highlight CursorLineNR guifg=#EA76D4 guibg=#2F3D6B
+highlight StatusLine guifg=#96B5B4 guibg=#1342DD
+highlight ModeMsg guifg=#ffffff guibg=#159393
 highlight htmlArg cterm=italic gui=italic
 highlight tsxAttrib gui=italic
 highlight xmlAttrib gui=italic
@@ -80,6 +87,7 @@ function TrimWhiteSpace()
 
 autocmd BufWritePre * :call TrimWhiteSpace()
 let g:prettier#autoformat = 0
+
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.ejs,*.yaml,*.html PrettierAsync
 
 function FormatCode()
@@ -103,7 +111,7 @@ let $BAT_THEME='TwoDark'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Comment', 'border': 'sharp' } }
 let $FZF_DEFAULT_OPTS="--ansi --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-p> :GFiles<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
